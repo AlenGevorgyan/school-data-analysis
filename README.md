@@ -72,4 +72,4 @@ Branches:
 - `main` - Stable code
 - `argam/data-infrastructure` - Data loading infrastructure
 - `alen/analysis-engine` - Analysis engine
-- `samo/vizualization` - Visualization and docs
+- `samo/visualization` - Visualization and docs
