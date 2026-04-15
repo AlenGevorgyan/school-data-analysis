@@ -1,6 +1,6 @@
 # School Data Analysis
 
-Vanadzori Eureka dprots AB serundi ashakertneri tvayleri verlutsutyun.
+Vanadzori Evrika dprots AB serundi ashakertneri tvayleri verlutsutyun.
 
 ## Team Members
 
