@@ -15,8 +15,7 @@ Vanadzori Evrika dprots AB serundi ashakertneri tvayleri verlutsutyun.
 ```
 school-data-analysis/
 ├── data/
-│   └── raw/                  # Excel files (do not commit)
-│       └── students.xlsx
+│   └── students.xlsx
 ├── src/
 │   ├── __init__.py
 │   ├── data_loader.py        # Excel sheet reading
