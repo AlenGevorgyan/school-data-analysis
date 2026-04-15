@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from utils.generic import mean_array, min_max, get_column, clean_data, calculate_average, find_best_student
 from utils.data_loader import load_all_grades
 
@@ -42,6 +43,58 @@ def analyze_grade(df, grade_name):
     
     return df_clean
 
+def create_comparison_chart(grades):
+    subjects = ['algebra', 'python', 'ab']
+    subj_names = ['Hanrahashiv', 'Python', 'AB']
+    
+    means_11 = []
+    means_12 = []
+    
+    for s in subjects:
+        if grades.get('11') is not None and s in grades['11'].columns:
+            means_11.append(mean_array(grades['11'][s]))
+        else:
+            means_11.append(0)
+            
+        if grades.get('12') is not None and s in grades['12'].columns:
+            means_12.append(mean_array(grades['12'][s]))
+        else:
+            means_12.append(0)
+    
+    x = np.arange(len(subjects))
+    width = 0.35
+    
+    fig, ax = plt.subplots(figsize=(10, 6))
+    bars1 = ax.bar(x - width/2, means_11, width, label='11-rd dasaran', color='green')
+    bars2 = ax.bar(x + width/2, means_12, width, label='12-rd dasaran', color='blue')
+    
+    ax.set_xlabel('Ararkner')
+    ax.set_ylabel('Mijin bal')
+    ax.set_title('Ararkaneri mijin balneri hamematum')
+    ax.set_xticks(x)
+    ax.set_xticklabels(subj_names)
+    ax.legend()
+    ax.grid(axis='y', alpha=0.3)
+    
+    for bar in bars1:
+        height = bar.get_height()
+        if height > 0:
+            ax.annotate(f'{height:.1f}',
+                        xy=(bar.get_x() + bar.get_width() / 2, height),
+                        xytext=(0, 3), textcoords="offset points",
+                        ha='center', va='bottom')
+    for bar in bars2:
+        height = bar.get_height()
+        if height > 0:
+            ax.annotate(f'{height:.1f}',
+                        xy=(bar.get_x() + bar.get_width() / 2, height),
+                        xytext=(0, 3), textcoords="offset points",
+                        ha='center', va='bottom')
+    
+    plt.tight_layout()
+    plt.savefig('grade_comparison.png', dpi=150)
+    print(f"\nGrafiky pahpanvel e grade_comparison.png")
+
 def main():
     print("Vanadzori Eureka dprots - AB Serundi Verlutsutyun")
     
@@ -53,6 +106,8 @@ def main():
         
         if grades.get('12') is not None:
             analyze_grade(grades['12'], "12-rd")
+        
+        create_comparison_chart(grades)
             
     except FileNotFoundError:
         print("Error: Excel file not found in data/ folder")
