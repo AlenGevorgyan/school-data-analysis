@@ -29,7 +29,7 @@ def analyze(df, grade_name):
     return df
 
 if __name__ == "__main__":
-    data = load_all_data('data/raw/students.xlsx')
+    data = load_all_data('data/data.xlsx')
     if data['11'] is not None:
         analyze(data['11'], "11-rd")
     if data['12'] is not None:
